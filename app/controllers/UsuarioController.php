@@ -30,7 +30,7 @@ class UsuarioController extends Usuario implements IApiUsable
         $id = $args['id'];
         $usuario = Usuario::obtenerUsuario($id);
         $payload = json_encode($usuario);
-
+      echo "hola";
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');

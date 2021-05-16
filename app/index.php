@@ -32,7 +32,7 @@ $app->group('/usuarios', function (RouteCollectorProxy $group) {
     $group->get('[/]', \UsuarioController::class . ':TraerTodos');
     $group->get('/{id}', \UsuarioController::class . ':TraerUno');
     $group->post('[/]', \UsuarioController::class . ':CargarUno');
-    $group->delete('[/]', \UsuarioController::class . ':CargarUno');
+    $group->delete('[/]', \UsuarioController::class . ':BorrarUno');
 });
 
 // $app->group('/productos', function (RouteCollectorProxy $group) {
