@@ -20,6 +20,7 @@ class Usuario
 
     public static function obtenerTodos()
     {
+        echo "asdasd";
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDatos->prepararConsulta("SELECT id, usuario, clave FROM usuarios");
         $consulta->execute();
