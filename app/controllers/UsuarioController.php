@@ -29,9 +29,9 @@ class UsuarioController extends Usuario implements IApiUsable
         // Buscamos usuario por id
         $id = $args['id'];
         $usuario = Usuario::obtenerUsuario($id);
-        $payload = json_encode($usuario);
-      echo "hola";
+        $payload = json_encode($usuario);        
         $response->getBody()->write($payload);
+        var_dump($response);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
