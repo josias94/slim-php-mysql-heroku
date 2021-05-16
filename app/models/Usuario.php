@@ -49,7 +49,8 @@ class Usuario
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
 
-        return $consulta->fetchObject('Usuario');
+        // return $consulta->fetchObject('Usuario');
+        return $consulta->fetchAll('Usuario');
     }
 
     public static function modificarUsuario()
