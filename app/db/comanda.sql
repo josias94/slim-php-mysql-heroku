@@ -90,7 +90,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `clave`, `email`, `localidad`, `rubro`, `fechaDeRegistro`) VALUES
-(1, 'Franco','Gimenez', 'Hsu23sDsjseWs', 'FrancoGimenez@gmail.com', 'Avellaneda', 'bartender', '2021/12/30'),
+(1, 'Franco','Gomez', 'Hsu23sDsjseWs', 'FrancoGimenez@gmail.com', 'Avellaneda', 'bartender', '2021/12/30'),
 (2, 'Pedro', 'Perez', 'dasdqsdw2sd23', 'PedroPerez@gmail.com', 'Adrogue', 'mozo', '2021/12/30'),
 (3, 'Jorge', 'Lopez', 'sda2s2f332f2', 'JorgeLopez@gmail.com', 'Burzaco', 'socio', '2021/12/30');
 

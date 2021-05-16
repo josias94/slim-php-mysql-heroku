@@ -53,7 +53,7 @@ class Usuario
         return $consulta->fetchAll(PDO::FETCH_CLASS,'Usuario');
     }
 
-    public static function modificarUsuario()
+    public function modificarUsuario()
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDato->prepararConsulta("UPDATE usuarios 
