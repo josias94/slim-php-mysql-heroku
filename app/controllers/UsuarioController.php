@@ -29,9 +29,8 @@ class UsuarioController extends Usuario implements IApiUsable
         // Buscamos usuario por id
         $id = $args['id'];
         $usuario = Usuario::obtenerUsuario($id);
-        var_dump($usuario);
-        $payload = json_encode($usuario);        
-        $response->getBody()->write($payload);        
+        $payload = json_encode($usuario);
+        $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
@@ -45,7 +44,7 @@ class UsuarioController extends Usuario implements IApiUsable
         return $response
           ->withHeader('Content-Type', 'application/json');
     }
-    
+
     public function ModificarUno($request, $response, $args)
     {
         $parametros = $request->getParsedBody();
@@ -61,15 +60,14 @@ class UsuarioController extends Usuario implements IApiUsable
     }
 
     public function BorrarUno($request, $response, $args)
-    {
-        $parametros = $request->getParsedBody();
+    {            
+        $usuarioId = $args['usuarioId'];        
+        
+        if(Usuario::borrarUsuario($usuarioId)){
+          $payload = json_encode(array("mensaje" => "Usuario borrado con exito"));      
+          $response->getBody()->write($payload);
+        }
 
-        $usuarioId = $parametros['usuarioId'];
-        Usuario::borrarUsuario($usuarioId);
-
-        $payload = json_encode(array("mensaje" => "Usuario borrado con exito"));
-
-        $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
     }

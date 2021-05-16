@@ -30,9 +30,9 @@ $app->addErrorMiddleware(true, true, true);
 // Routes
 $app->group('/usuarios', function (RouteCollectorProxy $group) {
     $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-    $group->get('/{id}', \UsuarioController::class . ':TraerUno');
+    $group->get('/id={id}', \UsuarioController::class . ':TraerUno');
     $group->post('[/]', \UsuarioController::class . ':CargarUno');
-    $group->delete('[/]', \UsuarioController::class . ':BorrarUno');
+    $group->delete('/id={usuarioId}', \UsuarioController::class . ':BorrarUno');
 });
 
 // $app->group('/productos', function (RouteCollectorProxy $group) {
