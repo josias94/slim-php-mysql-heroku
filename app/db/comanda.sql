@@ -77,7 +77,7 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `apellido` varchar(50) NOT NULL,
-  `clave` varchar(20) NOT NULL,
+  `clave` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `localidad` varchar(50) NOT NULL,
   `rubro` varchar(50) NOT NULL,

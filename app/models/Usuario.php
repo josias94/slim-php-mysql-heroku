@@ -26,7 +26,6 @@ class Usuario
         $consulta->bindValue(':rubro', $this->rubro, PDO::PARAM_STR);
         $fecha = new DateTime(date("d-m-Y"));
         $consulta->bindValue(':fechaDeRegistro', date_format($fecha, 'Y-m-d H:i:s'));
-        var_dump($consulta);
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();

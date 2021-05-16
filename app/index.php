@@ -30,15 +30,16 @@ $app->addErrorMiddleware(true, true, true);
 // Routes
 $app->group('/usuarios', function (RouteCollectorProxy $group) {
     $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-    $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
+    $group->get('/{id}', \UsuarioController::class . ':TraerUno');
     $group->post('[/]', \UsuarioController::class . ':CargarUno');
+    $group->delete('[/]', \UsuarioController::class . ':CargarUno');
 });
 
-$app->group('/productos', function (RouteCollectorProxy $group) {
-  $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-  $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
-  $group->post('[/]', \UsuarioController::class . ':CargarUno');
-});
+// $app->group('/productos', function (RouteCollectorProxy $group) {
+//   $group->get('[/]', \UsuarioController::class . ':TraerTodos');
+//   $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
+//   $group->post('[/]', \UsuarioController::class . ':CargarUno');
+// });
 
 
 $app->get('[/]', function (Request $request, Response $response) {    

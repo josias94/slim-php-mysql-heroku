@@ -8,18 +8,6 @@ class UsuarioController extends Usuario implements IApiUsable
     {
         $parametros = $request->getParsedBody();
 
-        /*
-            public $nombre;
-    public $apellido;
-    public $clave;
-    public $email;
-    public $localidad;
-    public $rubro;
-    public $fechaDeRegistro;//yyyy-MM-dd
-    public $fechaBaja;
-          */
-
-        // Creamos el usuario
         $usr = new Usuario();
         $usr->nombre = $parametros['nombre'];
         $usr->apellido = $parametros['apellido'];
