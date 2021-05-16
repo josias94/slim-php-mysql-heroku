@@ -43,7 +43,6 @@ class Usuario
 
     public static function obtenerUsuario($id)
     {
-        $id = intval($id);
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, apellido, clave, email, localidad, rubro, fechaDeRegistro
                                                         FROM usuarios WHERE id = :id");
