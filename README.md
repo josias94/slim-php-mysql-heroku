@@ -15,6 +15,7 @@ Luego comiteamos y pusheamos los cambios.
 git add .
 git commit -m "first commit"
 git push -u origin main
+php -S localhost:777 -t app
 ```
 
 ## 3- Crear y configurar la App en Heroku
