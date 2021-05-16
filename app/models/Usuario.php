@@ -3,16 +3,29 @@
 class Usuario
 {
     public $id;
-    public $usuario;
+    public $nombre;
+    public $apellido;
     public $clave;
+    public $email;
+    public $localidad;
+    public $rubro;
+    public $fechaDeRegistro;//yyyy-MM-dd
+    public $fechaBaja;
 
     public function crearUsuario()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO usuarios (usuario, clave) VALUES (:usuario, :clave)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO usuarios (nombre, apellido, clave, email, localidad, rubro, fechaDeRegistro)
+                                                        VALUES (:nombre, :apellido, :clave, :email, :localidad, :rubro, :fechaDeRegistro)");
         $claveHash = password_hash($this->clave, PASSWORD_DEFAULT);
-        $consulta->bindValue(':usuario', $this->usuario, PDO::PARAM_STR);
+        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);        
+        $consulta->bindValue(':apellido', $this->apellido, PDO::PARAM_STR);
         $consulta->bindValue(':clave', $claveHash);
+        $consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $consulta->bindValue(':localidad', $this->localidad, PDO::PARAM_STR);
+        $consulta->bindValue(':rubro', $this->rubro, PDO::PARAM_STR);
+        $fecha = new DateTime(date("d-m-Y"));
+        $consulta->bindValue(':fechaDeRegistro', date_format($fecha, 'Y-m-d H:i:s'));
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
@@ -20,9 +33,9 @@ class Usuario
 
     public static function obtenerTodos()
     {
-        echo "asdasd";
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, usuario, clave FROM usuarios");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, apellido, clave, email, localidad, rubro, fechaDeRegistro
+                                                        FROM usuarios");
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Usuario');
@@ -31,8 +44,9 @@ class Usuario
     public static function obtenerUsuario($usuario)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, usuario, clave FROM usuarios WHERE usuario = :usuario");
-        $consulta->bindValue(':usuario', $usuario, PDO::PARAM_STR);
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, apellido, clave, email, localidad, rubro, fechaDeRegistro
+                                                        FROM usuarios WHERE id = :id");
+        $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
         $consulta->execute();
 
         return $consulta->fetchObject('Usuario');
@@ -41,9 +55,20 @@ class Usuario
     public static function modificarUsuario()
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->prepararConsulta("UPDATE usuarios SET usuario = :usuario, clave = :clave WHERE id = :id");
-        $consulta->bindValue(':usuario', $this->usuario, PDO::PARAM_STR);
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE usuarios 
+                                                        SET nombre = :nombre,
+                                                        apellido = :apellido,
+                                                        clave = :clave,
+                                                        email = :email,
+                                                        localidad = :localidad,
+                                                        rubro = :rubro 
+                                                        WHERE id = :id");
+        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+        $consulta->bindValue(':apellido', $this->apellido, PDO::PARAM_STR);
         $consulta->bindValue(':clave', $this->clave, PDO::PARAM_STR);
+        $consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $consulta->bindValue(':localidad', $this->localidad, PDO::PARAM_STR);
+        $consulta->bindValue(':rubro', $this->rubro, PDO::PARAM_STR);
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
         $consulta->execute();
     }
