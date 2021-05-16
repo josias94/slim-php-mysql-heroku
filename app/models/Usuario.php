@@ -51,7 +51,7 @@ class Usuario
         $consulta->execute();
 
         // return $consulta->fetchObject('Usuario');
-        return $consulta->fetchAll('Usuario');
+        return $consulta->fetchAll(PDO::FETCH_CLASS,'Usuario');
     }
 
     public static function modificarUsuario()
