@@ -32,19 +32,21 @@ $app->group('/usuarios', function (RouteCollectorProxy $group) {
     $group->get('[/]', \UsuarioController::class . ':TraerTodos');
     $group->get('/id={id}', \UsuarioController::class . ':TraerUno');
     $group->post('[/]', \UsuarioController::class . ':CargarUno');
-    $group->put('[/]', \UsuarioController::class . ':ModificarUno');
+    $group->post('/Modificar', \UsuarioController::class . ':ModificarUno');
     $group->delete('/id={usuarioId}', \UsuarioController::class . ':BorrarUno');
 });
 
-// $app->group('/productos', function (RouteCollectorProxy $group) {
-//   $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-//   $group->get('/{usuario}', \UsuarioController::class . ':TraerUno');
-//   $group->post('[/]', \UsuarioController::class . ':CargarUno');
-// });
+$app->group('/productos', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \UsuarioController::class . ':TraerTodos');
+  $group->get('/id={id}', \UsuarioController::class . ':TraerUno');
+  $group->post('[/]', \UsuarioController::class . ':CargarUno');
+  $group->post('/Modificar', \UsuarioController::class . ':ModificarUno');
+  $group->delete('/id={id}', \UsuarioController::class . ':BorrarUno');
+});
 
 
 $app->get('[/]', function (Request $request, Response $response) {    
-    $response->getBody()->write("Slim Framework 4 PHP");
+    $response->getBody()->write("Bienvenido a la Comanda");
     return $response;
 
 });

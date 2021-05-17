@@ -72,6 +72,7 @@ class Usuario
         $consulta->bindValue(':rubro', $this->rubro, PDO::PARAM_STR);
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
         $consulta->execute();
+        return $consulta->rowCount();
     }
 
     public static function borrarUsuario($usuario)
