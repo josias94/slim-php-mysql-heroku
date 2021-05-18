@@ -66,7 +66,8 @@ CREATE TABLE `productos` (
   `precio` double NOT NULL,
   `codigoBarra` varchar(50) NOT NULL,
   `FechaRegistro` date NOT NULL,
-  `FechaUltimaModificacion` date NOT NULL
+  `FechaUltimaModificacion` date NOT NULL,
+  `FechaBaja` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
