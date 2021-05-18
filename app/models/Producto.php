@@ -15,7 +15,7 @@ class Producto
     public function crearProducto()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO Producto (nombre, tipo, stock, precio, codigoBarra, fechaDeRegistro, FechaUltModificacion)
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO Productos (nombre, tipo, stock, precio, codigoBarra, fechaDeRegistro, FechaUltModificacion)
                                                         VALUES (:nombre, :tipo, :stock, :precio, :codigoBarra, :fechaDeRegistro, :FechaUltModificacion)");
         
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);        
@@ -52,7 +52,7 @@ class Producto
         return $consulta->fetchAll(PDO::FETCH_CLASS,'Producto');
     }
 
-    public function modificarUsuario()
+    public function modificarProducto()
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDato->prepararConsulta("UPDATE productos 

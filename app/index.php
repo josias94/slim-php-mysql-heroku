@@ -15,6 +15,7 @@ require_once './db/AccesoDatos.php';
 // require_once './middlewares/Logger.php';
 
 require_once './controllers/UsuarioController.php';
+require_once './controllers/ProductoController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -37,11 +38,11 @@ $app->group('/usuarios', function (RouteCollectorProxy $group) {
 });
 
 $app->group('/productos', function (RouteCollectorProxy $group) {
-  $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-  $group->get('/id={id}', \UsuarioController::class . ':TraerUno');
-  $group->post('[/]', \UsuarioController::class . ':CargarUno');
-  $group->post('/Modificar', \UsuarioController::class . ':ModificarUno');
-  $group->delete('/id={id}', \UsuarioController::class . ':BorrarUno');
+  $group->get('[/]', \ProductoController::class . ':TraerTodos');
+  $group->get('/id={id}', \ProductoController::class . ':TraerUno');
+  $group->post('[/]', \ProductoController::class . ':CargarUno');
+  $group->post('/Modificar', \ProductoController::class . ':ModificarUno');
+  $group->delete('/id={id}', \ProductoController::class . ':BorrarUno');
 });
 
 
