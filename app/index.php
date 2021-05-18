@@ -17,6 +17,7 @@ require_once './db/AccesoDatos.php';
 require_once './controllers/UsuarioController.php';
 require_once './controllers/ProductoController.php';
 require_once './controllers/MesaController.php';
+require_once './controllers/PedidoController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -54,6 +55,15 @@ $app->group('/mesas', function (RouteCollectorProxy $group) {
   $group->delete('/id={codIdentificacion}', \MesaController::class . ':BorrarUno');
 });
 
+$app->group('/pedidos', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \PedidoController::class . ':TraerTodos');
+  $group->get('/id={id}', \PedidoController::class . ':TraerUno'); 
+  $group->post('[/]', \PedidoController::class . ':CargarUno');
+  $group->post('/Modificar', \PedidoController::class . ':ModificarUno');
+  $group->delete('/id={PedidoId}', \PedidoController::class . ':BorrarUno');
+  //Filtros
+  //$group->get('/mesa={idMesa}', \PedidoController::class . ':TraerTodosFilterByMesa');
+});
 
 $app->get('[/]', function (Request $request, Response $response) { 
   $response->getBody()->write("Bienvenido a la Comanda");

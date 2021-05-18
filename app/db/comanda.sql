@@ -44,14 +44,14 @@ CREATE TABLE `mesas` (
 
 CREATE TABLE `pedidos` (
   `id` int(11) NOT NULL,
-  `clienteId` int(11) NOT NULL,
+  `pedidoTicket` varchar(5) NOT NULL,
   `mesaId` int(11) NOT NULL,
-  `empleadoId` int(11) NOT NULL,
+  `usuarioId` int(11) NOT NULL,
   `productoId` int(11) NOT NULL,
-  `fechaAlta` date NOT NULL,
-  `fechaFinalizacion` date NOT NULL,
-  `importe` double NOT NULL,
-  `estadoFinal` int(11) NOT NULL
+  `fechaRegistro` date NOT NULL,
+  `fechaFinalizacion` date NULL,
+  `fechaBaja` date NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
