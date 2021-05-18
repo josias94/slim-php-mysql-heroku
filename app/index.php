@@ -16,6 +16,7 @@ require_once './db/AccesoDatos.php';
 
 require_once './controllers/UsuarioController.php';
 require_once './controllers/ProductoController.php';
+require_once './controllers/MesaController.php';
 
 // Load ENV
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
@@ -30,11 +31,11 @@ $app->addErrorMiddleware(true, true, true);
 
 // Routes
 $app->group('/usuarios', function (RouteCollectorProxy $group) {
-    $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-    $group->get('/id={id}', \UsuarioController::class . ':TraerUno');
-    $group->post('[/]', \UsuarioController::class . ':CargarUno');
-    $group->post('/Modificar', \UsuarioController::class . ':ModificarUno');
-    $group->delete('/id={usuarioId}', \UsuarioController::class . ':BorrarUno');
+  $group->get('[/]', \UsuarioController::class . ':TraerTodos');
+  $group->get('/id={id}', \UsuarioController::class . ':TraerUno');
+  $group->post('[/]', \UsuarioController::class . ':CargarUno');
+  $group->post('/Modificar', \UsuarioController::class . ':ModificarUno');
+  $group->delete('/id={usuarioId}', \UsuarioController::class . ':BorrarUno');
 });
 
 $app->group('/productos', function (RouteCollectorProxy $group) {
@@ -45,11 +46,18 @@ $app->group('/productos', function (RouteCollectorProxy $group) {
   $group->delete('/id={productoId}', \ProductoController::class . ':BorrarUno');
 });
 
+$app->group('/mesas', function (RouteCollectorProxy $group) {
+  $group->get('[/]', \MesaController::class . ':TraerTodos');
+  $group->get('/id={codIdentificacion}', \MesaController::class . ':TraerUno');
+  $group->post('[/]', \MesaController::class . ':CargarUno');
+  $group->post('/Modificar', \MesaController::class . ':ModificarUno');
+  $group->delete('/id={codIdentificacion}', \MesaController::class . ':BorrarUno');
+});
 
-$app->get('[/]', function (Request $request, Response $response) {    
-    $response->getBody()->write("Bienvenido a la Comanda");
-    return $response;
 
+$app->get('[/]', function (Request $request, Response $response) { 
+  $response->getBody()->write("Bienvenido a la Comanda");
+  return $response;
 });
 
 $app->run();

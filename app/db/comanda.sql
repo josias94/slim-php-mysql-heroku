@@ -28,10 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `mesas` (
-  `Id` int(11) NOT NULL,
-  `CodIdentificacion` varchar(5) NOT NULL,
-  `Capacidad` int(11) NOT NULL,
-  `Estado` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `codIdentificacion` varchar(5) NOT NULL,
+  `capacidad` int(11) NOT NULL,
+  `estado` int(11) NOT NULL,
+  `fechaRegistro` date NOT NULL,
+  `fechaBaja` date NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -41,15 +43,15 @@ CREATE TABLE `mesas` (
 --
 
 CREATE TABLE `pedidos` (
-  `Id` int(11) NOT NULL,
-  `ClienteId` int(11) NOT NULL,
-  `MesaId` int(11) NOT NULL,
-  `EmpleadoId` int(11) NOT NULL,
-  `ProductoId` int(11) NOT NULL,
-  `FechaAlta` date NOT NULL,
-  `FechaFinalizacion` date NOT NULL,
-  `Importe` double NOT NULL,
-  `EstadoFinal` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `clienteId` int(11) NOT NULL,
+  `mesaId` int(11) NOT NULL,
+  `empleadoId` int(11) NOT NULL,
+  `productoId` int(11) NOT NULL,
+  `fechaAlta` date NOT NULL,
+  `fechaFinalizacion` date NOT NULL,
+  `importe` double NOT NULL,
+  `estadoFinal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -65,9 +67,9 @@ CREATE TABLE `productos` (
   `stock` int(11) NOT NULL,
   `precio` double NOT NULL,
   `codigoBarra` varchar(50) NOT NULL,
-  `FechaRegistro` date NOT NULL,
-  `FechaUltimaModificacion` date NOT NULL,
-  `FechaBaja` date NULL
+  `fechaRegistro` date NOT NULL,
+  `fechaUltimaModificacion` date NOT NULL,
+  `fechaBaja` date NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
