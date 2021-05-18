@@ -20,8 +20,7 @@ class Pedido
                                                         VALUES (:mesaId, :pedidoTicket, :usuarioId, :productoId, :estado, :fechaRegistro)");
         $consulta->bindValue(':mesaId', $this->mesaId, PDO::PARAM_INT); 
         $uniqid =  substr(uniqid(), 8,5);
-        var_dump($uniqid);
-        $this->pedidoTicket = $uniqid;//TODO: Harcodeado
+        $this->pedidoTicket = $uniqid;
         $consulta->bindValue(':pedidoTicket', $this->pedidoTicket, PDO::PARAM_STR);        
         $consulta->bindValue(':usuarioId', $this->usuarioId, PDO::PARAM_INT);
         $consulta->bindValue(':productoId', $this->productoId, PDO::PARAM_INT);
