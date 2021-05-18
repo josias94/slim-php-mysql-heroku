@@ -42,7 +42,7 @@ $app->group('/productos', function (RouteCollectorProxy $group) {
   $group->get('/id={id}', \ProductoController::class . ':TraerUno');
   $group->post('[/]', \ProductoController::class . ':CargarUno');
   $group->post('/Modificar', \ProductoController::class . ':ModificarUno');
-  $group->delete('/id={id}', \ProductoController::class . ':BorrarUno');
+  $group->delete('/id={productoId}', \ProductoController::class . ':BorrarUno');
 });
 
 

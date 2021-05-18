@@ -70,7 +70,7 @@ class ProductoController extends Producto implements IApiUsable
         $prodId = $args['productoId'];        
         //TODO Falta columna fecha baja
         if(Producto::borrarProducto($prodId)){
-          $payload = json_encode(array("mensaje" => "Usuario producto con exito"));      
+          $payload = json_encode(array("mensaje" => "Producto borrado con exito"));      
           $response->getBody()->write($payload);
         }
 
