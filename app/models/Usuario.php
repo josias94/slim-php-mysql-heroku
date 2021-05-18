@@ -9,14 +9,14 @@ class Usuario
     public $email;
     public $localidad;
     public $rubro;
-    public $fechaDeRegistro;//yyyy-MM-dd
+    public $fechaRegistro;//yyyy-MM-dd
     public $fechaBaja;
 
     public function crearUsuario()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO usuarios (nombre, apellido, clave, email, localidad, rubro, fechaDeRegistro)
-                                                        VALUES (:nombre, :apellido, :clave, :email, :localidad, :rubro, :fechaDeRegistro)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO usuarios (nombre, apellido, clave, email, localidad, rubro, fechaRegistro)
+                                                        VALUES (:nombre, :apellido, :clave, :email, :localidad, :rubro, :fechaRegistro)");
         $claveHash = password_hash($this->clave, PASSWORD_DEFAULT);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);        
         $consulta->bindValue(':apellido', $this->apellido, PDO::PARAM_STR);
@@ -25,7 +25,7 @@ class Usuario
         $consulta->bindValue(':localidad', $this->localidad, PDO::PARAM_STR);
         $consulta->bindValue(':rubro', $this->rubro, PDO::PARAM_STR);
         $fecha = new DateTime(date("d-m-Y"));
-        $consulta->bindValue(':fechaDeRegistro', date_format($fecha, 'Y-m-d H:i:s'));
+        $consulta->bindValue(':fechaRegistro', date_format($fecha, 'Y-m-d H:i:s'));
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
@@ -34,7 +34,7 @@ class Usuario
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, apellido, clave, email, localidad, rubro, fechaDeRegistro
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, apellido, clave, email, localidad, rubro, fechaRegistro
                                                         FROM usuarios");
         $consulta->execute();
 
@@ -44,7 +44,7 @@ class Usuario
     public static function obtenerUsuario($id)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, apellido, clave, email, localidad, rubro, fechaDeRegistro
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, apellido, clave, email, localidad, rubro, fechaRegistro
                                                         FROM usuarios WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();

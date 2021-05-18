@@ -10,10 +10,10 @@ class ProductoController extends Producto implements IApiUsable
 
         $prod = new Producto();
         $prod->nombre = $parametros['nombre'];
-        $prod->apellido = $parametros['tipo'];
-        $prod->clave = $parametros['stock'];
-        $prod->email = $parametros['precio'];
-        $prod->localidad = $parametros['codigoBarra']; 
+        $prod->tipo = $parametros['tipo'];
+        $prod->stock = $parametros['stock'];
+        $prod->precio = $parametros['precio'];
+        $prod->codigoBarra = $parametros['codigoBarra']; 
         $prod->crearProducto();
 
         $payload = json_encode(array("mensaje" => "Producto creado con exito"));
@@ -51,11 +51,10 @@ class ProductoController extends Producto implements IApiUsable
       $prod = new Producto();
       $prod->id = $parametros['id'];
       $prod->nombre = $parametros['nombre'];
-      $prod->apellido = $parametros['apellido'];
-      $prod->clave = $parametros['clave'];
-      $prod->email = $parametros['email'];
-      $prod->localidad = $parametros['localidad'];
-      $prod->rubro = $parametros['rubro'];
+      $prod->tipo = $parametros['tipo'];
+      $prod->stock = $parametros['stock'];
+      $prod->precio = $parametros['precio'];
+      $prod->codigoBarra = $parametros['codigoBarra']; 
       $var = $prod->modificarProducto();
       //TODO: Validar si el Producto se modifico para mostrar el mensaje OK
 

@@ -8,15 +8,15 @@ class Producto
     public $stock;
     public $precio;
     public $codigoBarra;
-    public $fechaDeRegistro;//yyyy-MM-dd
-    public $fechaUltModificacion;
+    public $fechaRegistro;//yyyy-MM-dd
+    public $FechaUltimaModificacion;
     public $fechaBaja;
 
     public function crearProducto()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO Productos (nombre, tipo, stock, precio, codigoBarra, fechaDeRegistro, FechaUltModificacion)
-                                                        VALUES (:nombre, :tipo, :stock, :precio, :codigoBarra, :fechaDeRegistro, :FechaUltModificacion)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (nombre, tipo, stock, precio, codigoBarra, fechaRegistro, FechaUltimaModificacion)
+                                                        VALUES (:nombre, :tipo, :stock, :precio, :codigoBarra, :fechaRegistro, :FechaUltimaModificacion)");
         
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);        
         $consulta->bindValue(':tipo', $this->tipo, PDO::PARAM_STR);
@@ -24,8 +24,8 @@ class Producto
         $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
         $consulta->bindValue(':codigoBarra', $this->codigoBarra, PDO::PARAM_STR);
         $fecha = new DateTime(date("d-m-Y"));
-        $consulta->bindValue(':fechaDeRegistro', date_format($fecha, 'Y-m-d H:i:s'));
-        $consulta->bindValue(':fechaUltModificacion', date_format($fecha, 'Y-m-d H:i:s'));
+        $consulta->bindValue(':fechaRegistro', date_format($fecha, 'Y-m-d H:i:s'));
+        $consulta->bindValue(':FechaUltimaModificacion', date_format($fecha, 'Y-m-d H:i:s'));
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
@@ -34,17 +34,17 @@ class Producto
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, apellido, clave, email, localidad, rubro, fechaDeRegistro
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, tipo, stock, precio, codigoBarra, fechaRegistro, FechaUltimaModificacion
                                                         FROM productos");
         $consulta->execute();
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Usuario');
+        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto');
     }
 
     public static function obtenerProducto($id)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, apellido, clave, email, localidad, rubro, fechaDeRegistro
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, tipo, stock, precio, codigoBarra, fechaRegistro, FechaUltimaModificacion
                                                         FROM productos WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
@@ -57,19 +57,21 @@ class Producto
         $objAccesoDato = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDato->prepararConsulta("UPDATE productos 
                                                         SET nombre = :nombre,
-                                                        apellido = :apellido,
-                                                        clave = :clave,
-                                                        email = :email,
-                                                        localidad = :localidad,
-                                                        rubro = :rubro 
+                                                        tipo = :tipo,
+                                                        stock = :stock,
+                                                        precio = :precio,
+                                                        codigoBarra = :codigoBarra,
+                                                        FechaUltimaModificacion = :FechaUltimaModificacion
                                                         WHERE id = :id");
-        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':apellido', $this->apellido, PDO::PARAM_STR);
-        $consulta->bindValue(':clave', $this->clave, PDO::PARAM_STR);
-        $consulta->bindValue(':email', $this->email, PDO::PARAM_STR);
-        $consulta->bindValue(':localidad', $this->localidad, PDO::PARAM_STR);
-        $consulta->bindValue(':rubro', $this->rubro, PDO::PARAM_STR);
+        //TODO:Stock y precio con validacionincorrecta
         $consulta->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);        
+        $consulta->bindValue(':tipo', $this->tipo, PDO::PARAM_STR);
+        $consulta->bindValue(':stock', $this->stock, PDO::PARAM_INT);
+        $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
+        $consulta->bindValue(':codigoBarra', $this->codigoBarra, PDO::PARAM_STR);
+        $fecha = new DateTime(date("d-m-Y"));    
+        $consulta->bindValue(':FechaUltimaModificacion', date_format($fecha, 'Y-m-d H:i:s'));
         $consulta->execute();
         return $consulta->rowCount();
     }

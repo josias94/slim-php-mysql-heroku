@@ -83,7 +83,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(50) NOT NULL,
   `localidad` varchar(50) NOT NULL,
   `rubro` varchar(50) NOT NULL,
-  `fechaDeRegistro` date NOT NULL,
+  `fechaRegistro` date NOT NULL,
   `fechaBaja` date NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -91,7 +91,7 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `clave`, `email`, `localidad`, `rubro`, `fechaDeRegistro`) VALUES
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `clave`, `email`, `localidad`, `rubro`, `fechaRegistro`) VALUES
 (1, 'Franco','Gomez', 'Hsu23sDsjseWs', 'FrancoGimenez@gmail.com', 'Avellaneda', 'bartender', '2021/12/30'),
 (2, 'Pedro', 'Perez', 'dasdqsdw2sd23', 'PedroPerez@gmail.com', 'Adrogue', 'mozo', '2021/12/30'),
 (3, 'Jorge', 'Lopez', 'sda2s2f332f2', 'JorgeLopez@gmail.com', 'Burzaco', 'socio', '2021/12/30');
